@@ -1,13 +1,16 @@
-// import express from "express"
-const express = require("express")
-const userRoutes = require("./routes/userRoutes.js")
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const userRoutes = require("./routes/authRoutes.js");
 
- const app = express()
+const app = express();
 
-app.get("/" , (req , res) => {
- res.status(200).json({status : "success" ,msg : "wellcome"})
-})
+app.use(express.json());
+app.use(cookieParser());
 
-app.use("/api/v2"  ,userRoutes)
+app.get("/", (req, res) => {
+   res.send("welcome to api :) ");
+});
 
-module.exports = app
+app.use("/ajax/v1", userRoutes);
+
+module.exports = app;
